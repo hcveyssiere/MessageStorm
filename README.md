@@ -9,14 +9,14 @@ The server applicative is written in node and is supposed to run on a single VM 
 This project is roughly composed of two node applications :
 
 * the server application which is responsible for
-** offering socket.io connectivity
-** routing messages to clients
-** offering a basic monitoring API
+	* offering socket.io connectivity
+	* routing messages to clients
+	* offering a basic monitoring API
 
 * a sample client application which is responsible for
-** connecting to the server
-** logging all incoming messages
-** relaying distributed messages to other clients (through the server)
+	* connecting to the server
+	* logging all incoming messages (for monitoring purpose)
+	* relaying distributed messages to other clients (through the server)
 
 
 Messaging Protocol
