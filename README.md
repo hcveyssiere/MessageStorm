@@ -27,7 +27,6 @@ MessageStorm protocol is quite simple since server <-> client communication, sin
 ### Server to client `poke` message
 
 This is the base message of the protocol. This message is used by the server to send orders to clients. `poke` messages are composed of several fields:
-* `id` [mandatory] field, that identifies the message (and will let the server compute RTT statistics).
 * `ts` [mandatory] field, the UNIX timestamp (at which the server sent the message).
 * `depth` [optional] field. If this field is present, it must be a power of two. If depth>1, the client has to reply a `pokeBack` message with a depth field equals to depth/2. The server will then randomly picks up two clients and send them a `poke`message with the new depth and so on and so forth. This mecanism simulate a messaging chain to heavily load the system.
 * `treeId` [optional] field. This field identifies the tree. The client has to send back this id along with the depth so that the server knows which chain is concerned.
@@ -35,4 +34,5 @@ This is the base message of the protocol. This message is used by the server to 
 ### Client to server `pokeBack` message
 
 This message must be systematically sent by the client each times it receives a `poke` message. Here are the fields that this message can contain:
-* `ts` [mandatory] field, that indicated client
+* `delay` [mandatory] field. This field is the difference between the ts sent by the server and the local (client) UNIX timestamp. We assume that server and clients are syncronized with the same NTP server.
+* `serverTs` [mandatory] field. This field is the ts given by the server (it should be sent back by the client so that the server can compute message RTT more accurately)
