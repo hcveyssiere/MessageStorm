@@ -6,13 +6,12 @@ MessageStorm is a cloud-based messaging system experiment. This project is a pro
 The server applicative is written in node and is supposed to run on a single VM hosted on Amazon cloud (XL instance), publicly available from the Internet (no firewall should be used). It offers websocket connectivity to clients that should access the server from another network (OVH cloud for instance).
 
 
-This project is roughly composed of two node applications :
+This project is roughly composed of two node applications:
 
 1. the server application which is responsible for
 	* offering socket.io connectivity
 	* routing messages to clients
 	* offering a basic monitoring API
-
 
 2. a sample client application which is responsible for
 	* connecting to the server
@@ -23,8 +22,10 @@ This project is roughly composed of two node applications :
 Messaging Protocol
 ------------------
 
-MessageStorm protocol is quite simple since server <-> client communication, since it relies on two types of message :
+MessageStorm protocol is quite simple since server <-> client communication, since it relies on two types of message:
 
-### server to client "poke" message #
+### Server to client `poke` message
 
-tzettze
+This is the base message of the protocol. This message is used by the server to send orders to clients. `poke` messages are composed, at least of these fields:
+* `id` field, that identifies the message (and will let the server compute RTT statistics)
+* `params` field, that carries details about the actions that the client must take when it receives this message
