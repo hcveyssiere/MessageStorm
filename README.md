@@ -70,9 +70,9 @@ This message can be sent by the monitor to get the status of the server. There i
 
 This message will be sent by the server to the monitor in response to `statusRequest` message or automatically when an important event has occured (unicast poke answer received, last broadcast poke answser received, last tree poke answer received). Here is the detail of a `status` message structure (all fields are optional and depends on server's context):
 * `unicast` field. This field is present when the server wants to notify the monitor of the end of an unicast poke. It contains three fields:
-** `clientId` the id (socket.io id) of the poked client
-** `pingDelay` is the time taken by the poke to reach the client (not very accurate since this time is computed assuming that server and client are synchronized)
-** `rtt` is the round trip time of the poke (more accurate since computed by the server)
+	* `clientId` the id (socket.io id) of the poked client
+	* `pingDelay` is the time taken by the poke to reach the client (not very accurate since this time is computed assuming that server and client are synchronized)
+	* `rtt` is the round trip time of the poke (more accurate since computed by the server)
 * `broadcast` field. This field is present to notify the monitor of the status of a broadcast poke. This field is an array of couples (pingDelay, rtt). broadcast[i] indicated the ping delay and the RTT of the ith client, length(broadcast) indicates the number of answers already received.
 * `tree` field. This field is an array representing all the client involved in the tree. tree[i] is a dictionary containing the parent, the rtt and the pingDelay of the ith client involved in the tree.
 
